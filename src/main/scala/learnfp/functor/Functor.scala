@@ -9,5 +9,5 @@ class FunctorOps[A, F[_]](a:F[A])(implicit functor:Functor[F]) {
 }
 
 object FunctorOps {
-  implicit  def toFunctorOps[A, F[_]](f:F[A])(implicit functor:Functor[F]):FunctorOps[A, F] = new FunctorOps(f)
+  implicit def toFunctorOps[A, F[_]](f:F[A])(implicit functor:Functor[F]):FunctorOps[A, F] = new FunctorOps(f)
 }
