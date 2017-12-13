@@ -11,6 +11,9 @@ object Maybe {
   object Nothing {
     def fmap[A, B](a: Nothing[A])(fx: A => B): Nothing[B] = Nothing[B]()
   }
+
+  def nothing[A]():Maybe[A] = Nothing[A]()
+  def just[A](x:A):Maybe[A] = Just(x)
 }
 
 object MaybeInstance {
