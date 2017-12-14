@@ -14,5 +14,3 @@ class ApplicativeOps[A, R, F[_]](fx:F[A => R]) {
 object ApplicativeOps {
   implicit def toApplicativeOps[A, R, F[_]](fx:F[A => R])(implicit applicative:Applicative[A, R, F]) = new ApplicativeOps[A, R, F](fx)
 }
-
-
