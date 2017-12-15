@@ -4,11 +4,12 @@ import learnfp.functor.Functor
 
 abstract class Monad[M[_]](implicit functor:Functor[M]) {
   def pure[A](a:A):M[A]
-  def flatMap[A, B](fx: A => M[B])(a:M[A]):M[B]
+  def flatMap[A, B](a:M[A])(fx: A => M[B]):M[B]
 }
 
 class MonadOps[A, M[_]](a:M[A])(implicit monad:Monad[M]) {
-  def >>=[B](fx:A => M[B]):M[B] = monad.flatMap(fx)(a)
+  def >>=[B](fx:A => M[B]):M[B] = monad.flatMap(a)(fx)
+  def flatMap[B](fx: A => M[B]):M[B] = monad.flatMap(a)(fx)
 }
 
 class MonadOpsPure[A](a:A) {
