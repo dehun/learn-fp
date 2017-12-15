@@ -6,6 +6,7 @@ trait Functor[F[_]] {
 
 class FunctorOps[A, F[_]](a:F[A])(implicit functor:Functor[F]) {
   def fmap[B](fx:A => B):F[B] = functor.fmap(a)(fx)
+  def map[B](fx:A => B):F[B] = functor.fmap(a)(fx) // to be compatible with for
 }
 
 class FxFunctorOps[A, B](fx:A => B) {
