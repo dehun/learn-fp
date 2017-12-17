@@ -64,5 +64,19 @@ class TraversableTest extends WordSpecLike with Matchers {
       { List(r(5), l("boom"), r(7)) traverse {_ + 1} } shouldBe left[String, List[Int]]("boom");
       { List(r(5), l("boom"), l("baam")) traverse {_ + 1} } shouldBe left[String, List[Int]]("boom")
     }
+
+    import learnfp.functor.State
+    import learnfp.functor.State._
+    import learnfp.functor.StateInstance._
+    import learnfp.applicative.StateInstance._
+    import learnfp.traversable.StateInstance._
+
+    "sequence State" in {
+       { List(5.pure[String], State {s:String => (s + "boom", 6)}, 7.pure[String]) sequence }.run("baam ") shouldBe ("baam boom", List(5, 6, 7))
+    }
+
+    "traverse State" in {
+      { List(5.pure[String], State {s:String => (s + "boom", 6)}, 7.pure[String]) traverse {x:Int => x * 2} }.run("baam ") shouldBe ("baam boom", List(10, 12, 14))
+    }
   }
 }
