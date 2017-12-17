@@ -14,5 +14,5 @@ object DisjunctionInstance {
 
   implicit def disjunctionToApplicativeOps[L, A, R](fx:Disjunction[L, A => R])(
     implicit applicative:Applicative[A, R, ({type E[X] = Disjunction[L, X]})#E]) =
-    new ApplicativeOps[A, R, ({type E[X] = Disjunction[L, X]})#E](fx)
+    new FxApplicativeOps[A, R, ({type E[X] = Disjunction[L, X]})#E](fx)
 }

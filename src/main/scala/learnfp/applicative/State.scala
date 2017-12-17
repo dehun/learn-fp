@@ -13,5 +13,10 @@ object StateInstance {
     }
   }
 
-  implicit def stateToApplicativeOps[S, A, R](a:State[S, A => R]) = new ApplicativeOps[A, R, ({type E[X] = State[S, X]})#E](a)
+  class StatePureApplicativeOps[A](a:A) {
+    def pure[S] = stateApplicativeInstance[S, Unit, A].pure(a)
+  }
+
+  implicit def stateToApplicativeOps[S, A, R](a:State[S, A => R]) = new FxApplicativeOps[A, R, ({type E[X] = State[S, X]})#E](a)
+  implicit def stateToPureOps[A](a:A) = new StatePureApplicativeOps[A](a)
 }
