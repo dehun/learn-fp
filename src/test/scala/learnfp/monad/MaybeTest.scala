@@ -17,7 +17,7 @@ class MaybeTest extends WordSpecLike with Matchers {
           x <- 10.pure
           y <- just(20)
         } yield { x + y }
-      }shouldBe just(30)
+      } shouldBe just(30)
     }
 
     "work when nothing" in {
@@ -26,7 +26,7 @@ class MaybeTest extends WordSpecLike with Matchers {
           x <- 10.pure
           y <- nothing[Int]()
         } yield { x + y }
-      }shouldBe nothing()
+      } shouldBe nothing()
     }
   }
 }
