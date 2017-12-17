@@ -8,7 +8,7 @@ import learnfp.functor.DisjunctionInstance._
 import learnfp.functor.Disjunction._
 
 class DisjunctionTest extends WordSpecLike with Matchers {
-  type OrError[A] = Disjunction[String, A];
+  type OrError[A] = Disjunction[String, A]
 
   "disjunction monad" should {
     "work with rights" in {
