@@ -3,7 +3,7 @@ package learnfp.functor
 import org.scalatest.{Matchers, WordSpecLike}
 import learnfp.functor.StateInstance._
 
-class StateTest extends WordSpecLike with Matchers {
+class StateTestTest extends WordSpecLike with Matchers {
   "state functor" should {
     "put works" in {
       State.put(20).run(10) shouldBe (20, ())
