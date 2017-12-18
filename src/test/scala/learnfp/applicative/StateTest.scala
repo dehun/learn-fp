@@ -1,14 +1,12 @@
 package learnfp.applicative
 
 import org.scalatest.{Matchers, WordSpecLike}
-
+import learnfp.functor.State
+import learnfp.functor.State._
+import learnfp.functor.StateInstance._
+import learnfp.applicative.StateInstance._
 
 class StateTest extends WordSpecLike with Matchers {
-  import learnfp.functor.State
-  import learnfp.functor.State._
-  import learnfp.functor.StateInstance._
-  import learnfp.applicative.StateInstance._
-
   "state applicative" should {
     "work" in {
       def pure(x:Int) =

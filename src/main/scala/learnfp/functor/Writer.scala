@@ -17,4 +17,9 @@ object WriterInstance {
   }
 
   implicit def writerToFunctorOps[A, W](a:Writer[W, A]) = new FunctorOps[A, ({type E[X] = Writer[W, X]})#E](a)
+
+  class WriterFunctorOps[A, B](fx:A => B) {
+    def `<$>`[W](a:Writer[W, A]):Writer[W, B] = a fmap fx
+  }
+  implicit def writerToFunctorFxOps[A, R](fx:A => R) = new WriterFunctorOps[A, R](fx)
 }
