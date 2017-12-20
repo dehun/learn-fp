@@ -38,4 +38,8 @@ object MaybeT {
   implicit def maybeTMonadTransInstance[M[_]](implicit f:Functor[M], m:Monad[M]) = new MonadTransformer[M, MaybeT] {
     override def lift[A](a: M[A]): MaybeT[A, M] = MaybeT { f.fmap(a) { av => Just(av)} }
   }
+
+  def nothingT[A, M[_]](implicit f:Functor[M], m:Monad[M]):MaybeT[A, M] = MaybeT(m.pure(Nothing[A]()))
+
+  def lift[A, M[_]](a:M[A])(implicit f:Functor[M], m:Monad[M]) = maybeTMonadTransInstance.lift(a)
 }

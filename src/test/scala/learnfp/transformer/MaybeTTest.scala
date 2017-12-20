@@ -31,8 +31,19 @@ class MaybeTTest extends WordSpecLike with Matchers {
     import learnfp.functor.MaybeInstance._
     import learnfp.monad.MaybeInstance._
 
-    "work with Maybe" in {
+    "work with Maybe justs" in {
       testPure[Maybe]()
+    }
+
+    "work with Maybe nothings" in {
+      type App[A] = MaybeT[A, Maybe];
+      {
+        for {
+          x <- 10.pure[App]
+          _ <- MaybeT.lift(nothing[Unit]())
+          y <- 20.pure[App]
+        } yield { (x, y) }
+      }.runMaybeT shouldBe nothing()
     }
 
     import learnfp.functor.ListInstance._
@@ -48,6 +59,18 @@ class MaybeTTest extends WordSpecLike with Matchers {
 
     "work with Disjunction" in {
       testPure[({type E[X] = Disjunction[String, X]})#E]()
+    }
+
+    "work with nothingT" in {
+      type StringDisjunction[A] = Disjunction[String, A]
+      type App[A] = MaybeT[A, StringDisjunction];
+      {
+        for {
+          x <- 10.pure[App]
+          _ <- nothingT[Unit, StringDisjunction]
+          y <- 20.pure[App]
+        } yield {(x, y)}
+      }.runMaybeT shouldBe RightDisjunction(nothing())
     }
   }
 }
