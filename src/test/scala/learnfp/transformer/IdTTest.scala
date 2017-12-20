@@ -23,6 +23,8 @@ import learnfp.functor.Disjunction._
 import learnfp.functor.DisjunctionInstance._
 import learnfp.monad.DisjunctionInstance._
 
+import learnfp.transformer.MonadTransformer._
+
 class IdTTest extends WordSpecLike with Matchers {
   "IdT" should {
     def testPure[M[_]](implicit functor:Functor[M], monad:Monad[M]) = {
@@ -74,7 +76,21 @@ class IdTTest extends WordSpecLike with Matchers {
 
     import learnfp.functor.State
     import learnfp.functor.State._
-    import learnfp.functor.StateInstance._
-    import learnfp.monad.StateInstance._
+    import learnfp.functor.StateInstance.stateInstance
+    import learnfp.monad.StateInstance.stateMonadInstance
+
+    "work with State" in {
+      type StringState[A] = State[String, A]
+      type App[A] = IdT[A, StringState];
+      val modifyState:App[Unit] = idtMonadTransInstance[StringState].lift[Unit](State.put("baam"));
+      {
+        for {
+          x <- 10.pure[App]
+          y <- "a".pure[App]
+          _ <- modifyState
+          z <- 30.pure[App]
+        } yield { (x, y, z) }
+      }.runIdT.run("boom") shouldBe ("baam", Id(10, "a", 30))
+    }
   }
 }
