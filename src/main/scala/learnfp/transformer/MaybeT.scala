@@ -2,8 +2,7 @@ package learnfp.transformer
 
 import learnfp.functor.Functor
 import learnfp.functor.Maybe.{Just, Maybe, Nothing}
-import learnfp.monad.Monad
-
+import learnfp.monad.{Monad, MonadOps}
 import learnfp.functor.FunctorOps._
 import learnfp.monad.MonadOps._
 
@@ -32,6 +31,9 @@ object MaybeT {
       }
     }
   }
+
+  implicit def maybeTToMonadOps[A, M[_]](a:MaybeT[A, M])(implicit m:Monad[M], f:Functor[M]) =
+    new MonadOps[A, ({type E[X] = MaybeT[X, M]})#E](a)
 
   implicit def maybeTMonadTransInstance[M[_]](implicit f:Functor[M], m:Monad[M]) = new MonadTransformer[M, MaybeT] {
     override def lift[A](a: M[A]): MaybeT[A, M] = MaybeT { f.fmap(a) { av => Just(av)} }
