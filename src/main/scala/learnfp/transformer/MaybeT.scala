@@ -41,5 +41,5 @@ object MaybeT {
 
   def nothingT[A, M[_]](implicit f:Functor[M], m:Monad[M]):MaybeT[A, M] = MaybeT(m.pure(Nothing[A]()))
 
-  def lift[A, M[_]](a:M[A])(implicit f:Functor[M], m:Monad[M]) = maybeTMonadTransInstance.lift(a)
+  def lift[A, M[_]](a:M[A])(implicit f:Functor[M], m:Monad[M]):MaybeT[A, M] = maybeTMonadTransInstance.lift(a)
 }

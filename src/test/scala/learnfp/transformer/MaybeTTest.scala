@@ -72,5 +72,38 @@ class MaybeTTest extends WordSpecLike with Matchers {
         } yield {(x, y)}
       }.runMaybeT shouldBe RightDisjunction(nothing())
     }
+
+    import learnfp.functor.State
+    import learnfp.functor.State._
+    import learnfp.functor.StateInstance.stateInstance
+    import learnfp.monad.StateInstance.stateMonadInstance
+
+    "work with State modifications" in {
+      type StringState[A] = State[String, A]
+      type App[A] = MaybeT[A, StringState];
+      {
+        for {
+          x <- 10.pure[App]
+          _ <- MaybeT.lift[Unit, StringState](put("boom"))
+          y <- 20.pure[App]
+          z <- 30.pure[App]
+        } yield {(x, y, z)}
+      }.runMaybeT.run("baam") shouldBe ("boom", Just(10, 20, 30))
+    }
+
+    "do not modify State after nothingT encountered" in {
+      type StringState[A] = State[String, A]
+      type App[A] = MaybeT[A, StringState];
+      {
+        for {
+          x <- 10.pure[App]
+          _ <- MaybeT.lift[Unit, StringState](put("boom 2"))
+          y <- 20.pure[App]
+          _ <- nothingT[Unit, StringState]
+          _ <- MaybeT.lift[Unit, StringState](put("boom 3"))
+          z <- 30.pure[App]
+        } yield {(x, y, z)}
+      }.runMaybeT.run("baam") shouldBe ("boom 2", nothing())
+    }
   }
 }
