@@ -21,10 +21,12 @@ object IdT {
     }
   }
 //
-//  implicit def idtToMonadOps[A, M[_]](a:IdT[A, M])(implicit m:Monad[M], f:Functor[M]) =
-//    new MonadOps[A, ({type E[X] = IdT[X, M]})#E](a)
+  implicit def idtToMonadOps[A, M[_]](a:IdT[A, M])(implicit m:Monad[M], f:Functor[M]) =
+    new MonadOps[A, ({type E[X] = IdT[X, M]})#E](a)
 
   implicit def idtMonadTransInstance[M[_]](implicit m:Monad[M], f:Functor[M]) = new MonadTransformer[M, IdT] {
     override def lift[A](a: M[A]): IdT[A, M] = IdT(f.fmap(a){ x:A => Id(x) })
   }
+
+  def lift[A, M[_]](a:M[A])(implicit f:Functor[M], m:Monad[M]):IdT[A, M] = idtMonadTransInstance[M].lift(a)
 }

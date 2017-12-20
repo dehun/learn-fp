@@ -6,7 +6,7 @@ import org.scalatest.{Matchers, WordSpecLike}
 import learnfp.functor.Functor
 import learnfp.functor.FunctorOps._
 import learnfp.monad.Monad
-import learnfp.monad.MonadOps._
+import learnfp.monad.MonadOps.toMonadOpsPure
 
 import learnfp.functor.Id
 import learnfp.functor.IdInstance._
@@ -27,6 +27,7 @@ import learnfp.transformer.MonadTransformer._
 
 class IdTTest extends WordSpecLike with Matchers {
   "IdT" should {
+
     def testPure[M[_]](implicit functor:Functor[M], monad:Monad[M]) = {
       type App[A] = IdT[A, M];
       {
@@ -53,6 +54,19 @@ class IdTTest extends WordSpecLike with Matchers {
     "work with Maybe justs" in {
       testPure[Maybe]
     }
+
+    "work with Maybe nothing" in {
+      type App[A] = IdT[A, Maybe];
+      {
+        for {
+          x <- 10.pure[App]
+          a <- IdT.lift(nothing[Unit])
+          y <- 20.pure[App]
+          z <- 30.pure[App]
+        } yield { (a, x + y + z) }
+      }.runIdT shouldBe nothing[Unit]()
+    }
+
 
     "lift with Maybe" in {
       testLift[Maybe]
@@ -82,12 +96,11 @@ class IdTTest extends WordSpecLike with Matchers {
     "work with State" in {
       type StringState[A] = State[String, A]
       type App[A] = IdT[A, StringState];
-      val modifyState:App[Unit] = idtMonadTransInstance[StringState].lift[Unit](State.put("baam"));
       {
         for {
           x <- 10.pure[App]
           y <- "a".pure[App]
-          _ <- modifyState
+          _ <- IdT.lift[Unit, StringState](State.put("baam"));
           z <- 30.pure[App]
         } yield { (x, y, z) }
       }.runIdT.run("boom") shouldBe ("baam", Id(10, "a", 30))
