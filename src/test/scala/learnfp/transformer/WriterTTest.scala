@@ -1,5 +1,5 @@
 package learnfp.transformer
 
-class WriterT {
+class WriterTTest {
 
 }
