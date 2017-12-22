@@ -53,8 +53,33 @@ class WriterTTest extends WordSpecLike with Matchers {
           _ <- WriterT.tell[Maybe, List[String]](List("2"))
           _ <- WriterT.lift[Unit, Maybe, List[String]](nothing[Unit]())
           z <- 30.pure[App]
-        } yield {(x, y, z)}
+        } yield { (x, y, z) }
       }.runWriterT.asInstanceOf[Nothing[Unit]] shouldBe nothing[Unit]()
+    }
+
+    import learnfp.functor.State
+    import learnfp.functor.State._
+    import learnfp.functor.StateInstance._
+    import learnfp.monad.StateInstance._
+
+    "work with State" in {
+      type StringState[A] = State[String, A]
+      type App[A] = WriterT[A, StringState, List[String]];
+      val r = {
+        for {
+          x <- 10.pure[App]
+          _ <- WriterT.lift[Unit, StringState, List[String]](State.put("een"))
+          _ <- WriterT.tell[StringState, List[String]](List("one"))
+          y <- 20.pure[App]
+          _ <- WriterT.lift[Unit, StringState, List[String]](State.put("twee"))
+          _ <- WriterT.tell[StringState, List[String]](List("two"))
+          z <- 30.pure[App]
+          _ <- WriterT.lift[Unit, StringState, List[String]](State.put("drie"))
+          _ <- WriterT.tell[StringState, List[String]](List("three"))
+        } yield { (x, y, z) }
+      }.runWriterT.run("null")
+      r._1 shouldBe "drie"
+      r._2.run() shouldBe (List("one", "two", "three"), (10, 20, 30))
     }
   }
 }
