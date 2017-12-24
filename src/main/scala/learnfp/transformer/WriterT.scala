@@ -52,7 +52,7 @@ object WriterT {
      m.pure(writerMonadInstance.pure(a))
   }
 
-  implicit def writerTMonadTransInstance[A, M[_], W](a:A)(implicit f:Functor[M], m:Monad[M], w:Monoid[W]) =
+  implicit def writerTMonadTransInstance[A, M[_], W](implicit f:Functor[M], m:Monad[M], w:Monoid[W]) =
     new MonadTransformer[M, ({type E[X, Y[_]] = WriterT[X, Y, W]})#E] {
       override def lift[A](a: M[A]): WriterT[A, M, W] = WriterT.lift(a)
     }
