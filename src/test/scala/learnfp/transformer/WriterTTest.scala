@@ -23,7 +23,7 @@ class WriterTTest extends WordSpecLike with Matchers {
           _ <- WriterT.tell(List("2"))
           z <- 30.pure[App]
         } yield {(x, y, z)}
-      }.runWriterT.value.run() shouldBe (List("1", "2"), (10, 20, 30))
+      }.runWriterT().value shouldBe (List("1", "2"), (10, 20, 30))
     }
 
     import learnfp.functor.Maybe._
@@ -40,7 +40,7 @@ class WriterTTest extends WordSpecLike with Matchers {
           _ <- WriterT.tell[Maybe, List[String]](List("2"))
           z <- 30.pure[App]
         } yield {(x, y, z)}
-      }.runWriterT.asInstanceOf[Just[Writer[List[String], (Int, Int, Int)]]].value.run() shouldBe (List("1", "2"), (10, 20, 30))
+      }.runWriterT().asInstanceOf[Just[(List[String], (Int, Int, Int))]].value shouldBe (List("1", "2"), (10, 20, 30))
     }
 
     "work with maybe nothing" in {
@@ -54,7 +54,7 @@ class WriterTTest extends WordSpecLike with Matchers {
           _ <- WriterT.lift[Unit, Maybe, List[String]](nothing[Unit]())
           z <- 30.pure[App]
         } yield { (x, y, z) }
-      }.runWriterT.asInstanceOf[Nothing[Unit]] shouldBe nothing[Unit]()
+      }.runWriterT().asInstanceOf[Nothing[Unit]] shouldBe nothing[Unit]()
     }
 
     import learnfp.functor.State
@@ -77,9 +77,9 @@ class WriterTTest extends WordSpecLike with Matchers {
           _ <- WriterT.lift[Unit, StringState, List[String]](State.put("drie"))
           _ <- WriterT.tell[StringState, List[String]](List("three"))
         } yield { (x, y, z) }
-      }.runWriterT.run("null")
+      }.runWriterT().run("null")
       r._1 shouldBe "drie"
-      r._2.run() shouldBe (List("one", "two", "three"), (10, 20, 30))
+      r._2 shouldBe (List("one", "two", "three"), (10, 20, 30))
     }
   }
 }

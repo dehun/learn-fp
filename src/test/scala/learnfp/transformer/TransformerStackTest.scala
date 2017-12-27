@@ -30,8 +30,8 @@ class TransformerStackTest extends WordSpecLike with Matchers {
           _ <- StateT.lift[String, OuterT, Unit](WriterT.tell[Maybe, List[String]](List("drie")))
           _ <- StateT.putT[String, OuterT]("three")
         } yield x
-      }.runStateT("null").runWriterT match {
-        case Just(v) => v.run() shouldBe (List("een", "twee", "drie"), ("three", 10))
+      }.runStateT("null").runWriterT() match {
+        case Just(v) => v shouldBe (List("een", "twee", "drie"), ("three", 10))
       }
     }
   }
