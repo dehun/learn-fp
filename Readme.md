@@ -22,7 +22,8 @@ Implementing something = making all tests green for that thing.
 - Observe general typeclass pattern in `learnfp/typeclass/TypeClass.scala`.
 - Implement `learnfp/typeclass/TotalOrder.scala`
 - Implement `learnfp/typeclass/Show.scala`
-- Extra material: TBD
+- Extra material: 
+  - https://blog.scalac.io/2017/04/19/typeclasses-in-scala.html
 
 ### Monoids ###
 
@@ -30,6 +31,9 @@ Implementing something = making all tests green for that thing.
 - Implement `learn-fp/src/main/scala/learnfp/monoid/ListMonoid.scala`
 - Implement `learn-fp/src/main/scala/learnfp/monoid/SimpleMonoid.scala`
 - Implement `learnfp/monoid/PairMonoid.scala`
+- Extra material:
+  - Bartosz Milewski: Category Theory 3.1: Examples of categories, orders, monoids
+  
 
 ### Functors ###
 
@@ -40,7 +44,10 @@ Implementing something = making all tests green for that thing.
 - Implement `learnfp/functor/Disjunction.scala`
 - Implement `learnfp/functor/Writer.scala`
 - Implement `learnfp/functor/State.scala`
-- Extra material: TBD
+- Extra material:
+  - http://learnyouahaskell.com/functors-applicative-functors-and-monoids
+  - https://thedet.wordpress.com/2012/04/28/functors-monads-applicatives-can-be-so-simple/
+  - Bartosz Milewski: Category Theory 6.1: Functors 
 
 ### Monads ###
 
@@ -51,7 +58,9 @@ Implementing something = making all tests green for that thing.
 - Implement `learnfp/monad/Disjunction.scala`
 - Implement `learnfp/monad/Writer.scala`
 - Implement `learnfp/monad/State.scala`
-- Extra material: TBD
+- Extra material
+  - Brian Beckman: Don't fear the Monad
+  - http://eed3si9n.com/learning-scalaz/Monad+transformers.html
 
 ### Applicatives ###
 
@@ -63,7 +72,9 @@ Implementing something = making all tests green for that thing.
 - Implement `learnfp/applicative/Writer.scala`
 - Implement `learnfp/applicative/State.scala`
 - Implement `learnfp/traversable/Traversable.scala`
-- Extra material: TBD
+- Extra material 
+  - https://en.wikibooks.org/wiki/Haskell/Applicative_functors
+  - http://eed3si9n.com/learning-scalaz/Applicative.html
 
 ### Monad Transformers ###
 
@@ -81,5 +92,13 @@ Implementing something = making all tests green for that thing.
   - http://blog.krobinson.me/posts/monads-part-2-the-free-monad/
   - https://underscore.io/blog/posts/2015/04/14/free-monads-are-simple.html
   
+### Bonus ###
+
+- Implement Reader functor, monad, applicative and write unit tests for that
+- Implement ReaderT and write unit tests for that
+- Implement applicative for monad transformers
+- Implement applicative for Free
+  
 # Credits #
 - Yuriy Netesov - initial implementation
+- Extra material references are owned by other authors
