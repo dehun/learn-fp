@@ -55,7 +55,6 @@ class FreeTest extends WordSpecLike with Matchers {
       case class MoveLeft(d:Int) extends Movement[Unit]
       case class MoveRight(d:Int) extends Movement[Unit]
 
-      //type TurtleState[A] = State[Position, A]
       class MovementToState extends Natural[Movement, ({type E[X] = State[Position, X]})#E] {
         override def transform[A](a: Movement[A])(implicit g: Functor[({type E[X] = State[Position, X]})#E]): State[Position, A] = a match {
           case Start(pos) => State.put(pos)

@@ -6,7 +6,7 @@ import learnfp.functor.{Functor, FunctorOps}
 import scala.annotation.tailrec
 
 sealed trait Free[F[_], A]
-final case class Return[F[_], A](a:A)extends Free[F, A]
+final case class Return[F[_], A](a:A) extends Free[F, A]
 final case class FlatMap[F[_], A, B](a:Free[F, A], fx:A => Free[F, B]) extends Free[F, B]
 final case class LiftF[F[_], A](fn:F[A]) extends Free[F, A]
 
