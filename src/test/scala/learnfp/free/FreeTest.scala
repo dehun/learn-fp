@@ -2,7 +2,7 @@ package learnfp.free
 
 import org.scalatest.{Matchers, WordSpecLike}
 import learnfp.free.Free._
-import learnfp.functor.{Functor, Id}
+import learnfp.functor.{Functor, Id, StateInstance}
 import learnfp.functor.IdInstance._
 import learnfp.monad.IdInstance._
 
@@ -81,6 +81,43 @@ class FreeTest extends WordSpecLike with Matchers {
 
       Free.foldF[Movement, ({type E[X] = State[Position, X]})#E, Unit](program)(new MovementToState()).run(Position(5, 5)) shouldBe
         (Position(x=10 + 2 + 1, y=10 + 2), ())
+
+      // use same program but now log movements
+      import learnfp.transformer.WriterT
+      import learnfp.transformer.WriterT._
+      import learnfp.monoid.ListMonoid._
+
+      type TurtleState[X] = State[Position, X]
+      type TurtleStateWriter[X] = WriterT[X, TurtleState, List[String]]
+
+      class MovementToWriterTState extends Natural[Movement, TurtleStateWriter] {
+        override def transform[A](a: Movement[A])(implicit f: Functor[TurtleStateWriter]): TurtleStateWriter[A] = a match {
+          case Start(pos) => for {
+            _ <- WriterT.tell[TurtleState, List[String]](List(s"starting at $pos"))
+            _ <- WriterT.lift[Unit, TurtleState, List[String]](State.put[Position](pos))
+          } yield {}
+          case MoveUp(d) => for {
+            _ <- WriterT.tell[TurtleState, List[String]](List(s"moving up $d steps"))
+            _ <- WriterT.lift[Unit, TurtleState, List[String]](State.modify[Position] {p => p.copy(y=p.y + d)})
+          } yield {}
+          case MoveDown(d) => for {
+            _ <- WriterT.tell[TurtleState, List[String]](List(s"moving down $d steps"))
+            _ <- WriterT.lift[Unit, TurtleState, List[String]](State.modify[Position] {p => p.copy(y=p.y - d)})
+          } yield {}
+          case MoveLeft(d) => for {
+            _ <- WriterT.tell[TurtleState, List[String]](List(s"moving left $d steps"))
+            _ <- WriterT.lift[Unit, TurtleState, List[String]](State.modify[Position] {p => p.copy(x=p.x - d)})
+          } yield {}
+          case MoveRight(d) => for {
+            _ <- WriterT.tell[TurtleState, List[String]](List(s"moving right $d steps"))
+            _ <- WriterT.lift[Unit, TurtleState, List[String]](State.modify[Position] {p => p.copy(x=p.x + d)})
+          } yield {}
+        }
+      }
+
+      Free.foldF(program)(new MovementToWriterTState).runWriterT().run(Position(5,5)) shouldBe
+        (Position(x=10 + 2 + 1, y= 10 + 2),
+          (List("starting at Position(10,10)", "moving up 2 steps", "moving right 2 steps", "moving right 1 steps"), ()))
     }
   }
 }
