@@ -62,6 +62,7 @@ Implementing something = making all tests green for that thing.
 - Implement `learnfp/applicative/Disjunction.scala`
 - Implement `learnfp/applicative/Writer.scala`
 - Implement `learnfp/applicative/State.scala`
+- Implement `learnfp/traversable/Traversable.scala`
 - Extra material: TBD
 
 ### Monad Transformers ###
@@ -77,5 +78,8 @@ Implementing something = making all tests green for that thing.
 
 - Implement `learnfp/free/Free.scala` and pass all unit tests in `learn-fp/src/test/scala/learnfp/free/FreeTest.scala`
 - Extra material:
-- - http://blog.krobinson.me/posts/monads-part-2-the-free-monad/
-- - https://underscore.io/blog/posts/2015/04/14/free-monads-are-simple.html
+  - http://blog.krobinson.me/posts/monads-part-2-the-free-monad/
+  - https://underscore.io/blog/posts/2015/04/14/free-monads-are-simple.html
+  
+# Credits #
+- Yuriy Netesov - initial implementation
