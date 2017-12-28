@@ -9,8 +9,8 @@ NICTA course was a great and interesting challenge for me to do in Haskell.
 I think Scala community will benefit from the similar course.
 
 ## Target audience ##
-The material in here is quite poor on theoretical part.
-I have tried to link other articles that I have found to be good into this course to compensate for this.
+The material in here is quite poor on theoretical/explanation part.
+I have tried to link material from other authors that I have found to be good into this course Readme to compensate for this.
 Some prior experience with functional idioms is recommended, but not neccessary.
 
 ## Progression ##
@@ -83,7 +83,8 @@ Implementing something = making all tests green for that thing.
 - Implement `learnfp/transformer/MaybeT.scala`
 - Implement `learnfp/transformer/WriterT.scala`
 - Implement `learnfp/transformer/StateT.scala`
-- Extra material: TBD
+- Extra material: 
+  - http://eed3si9n.com/learning-scalaz/Monad+transformers.html
 
 ### Free monad ###
 
@@ -98,7 +99,14 @@ Implementing something = making all tests green for that thing.
 - Implement ReaderT and write unit tests for that
 - Implement applicative for monad transformers
 - Implement applicative for Free
+
+# What wes left out #
+
+- Cofunctors
+- Reader
+- Eff
   
 # Credits #
+
 - Yuriy Netesov - initial implementation
 - Extra material references are owned by other authors
