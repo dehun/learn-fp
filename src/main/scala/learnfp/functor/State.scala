@@ -8,6 +8,7 @@ case class State[S, A](run:S => (S, A)) {
 object State {
   def put[S](ns:S):State[S, Unit] = State {s:S => (ns, ()) }
   def get[S]:State[S, S] = State {s:S => (s, s) }
+  def modify[S](fx:S => S):State[S, Unit] = State {s:S => (fx(s), ())}
 }
 
 object StateInstance {
