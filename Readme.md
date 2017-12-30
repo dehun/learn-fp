@@ -13,6 +13,10 @@ The material in here is quite poor on theoretical/explanation part.
 I have tried to link material from other authors that I have found to be good into this course Readme to compensate for this.
 Some prior experience with functional idioms is recommended, but not neccessary.
 
+## How to start ##
+Just git clone this repository and follow steps in progression section.
+In case if you got stuck - check answers branch.
+
 ## Progression ##
 It is important to keep the progression - a lot of things depend on each other.
 Implementing something = making all tests green for that thing.
