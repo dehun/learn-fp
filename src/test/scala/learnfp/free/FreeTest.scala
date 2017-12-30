@@ -18,7 +18,7 @@ class FreeTest extends WordSpecLike with Matchers {
       case class MoveRight(pos:Position, d:Int) extends Movement[Position]
 
       class MovementToId extends Natural[Movement, Id] {
-        override def transform[A](a: Movement[A])(implicit g: Functor[Id]): Id[A] = a match {
+        override def transform[A](a: Movement[A]): Id[A] = a match {
           case Start(pos:Position) => Id(pos)
           case MoveUp(p, d) => Id(Position(x=p.x, y=p.y + d))
           case MoveDown(p, d) => Id(Position(x=p.y, y =p.y - d))
@@ -56,7 +56,7 @@ class FreeTest extends WordSpecLike with Matchers {
       case class MoveRight(d:Int) extends Movement[Unit]
 
       class MovementToState extends Natural[Movement, ({type E[X] = State[Position, X]})#E] {
-        override def transform[A](a: Movement[A])(implicit g: Functor[({type E[X] = State[Position, X]})#E]): State[Position, A] = a match {
+        override def transform[A](a: Movement[A]): State[Position, A] = a match {
           case Start(pos) => State.put(pos)
           case MoveUp(d) => State.modify[Position](p => p.copy(y=p.y + d))
           case MoveDown(d) => State.modify[Position](p => p.copy(y=p.y - d))
@@ -90,28 +90,14 @@ class FreeTest extends WordSpecLike with Matchers {
       type TurtleState[X] = State[Position, X]
       type TurtleStateWriter[X] = WriterT[X, TurtleState, List[String]]
 
+      // TODO: implement me
       class MovementToWriterTState extends Natural[Movement, TurtleStateWriter] {
-        override def transform[A](a: Movement[A])(implicit f: Functor[TurtleStateWriter]): TurtleStateWriter[A] = a match {
-          case Start(pos) => for {
-            _ <- WriterT.tell[TurtleState, List[String]](List(s"starting at $pos"))
-            _ <- WriterT.lift[Unit, TurtleState, List[String]](State.put[Position](pos))
-          } yield {}
-          case MoveUp(d) => for {
-            _ <- WriterT.tell[TurtleState, List[String]](List(s"moving up $d steps"))
-            _ <- WriterT.lift[Unit, TurtleState, List[String]](State.modify[Position] {p => p.copy(y=p.y + d)})
-          } yield {}
-          case MoveDown(d) => for {
-            _ <- WriterT.tell[TurtleState, List[String]](List(s"moving down $d steps"))
-            _ <- WriterT.lift[Unit, TurtleState, List[String]](State.modify[Position] {p => p.copy(y=p.y - d)})
-          } yield {}
-          case MoveLeft(d) => for {
-            _ <- WriterT.tell[TurtleState, List[String]](List(s"moving left $d steps"))
-            _ <- WriterT.lift[Unit, TurtleState, List[String]](State.modify[Position] {p => p.copy(x=p.x - d)})
-          } yield {}
-          case MoveRight(d) => for {
-            _ <- WriterT.tell[TurtleState, List[String]](List(s"moving right $d steps"))
-            _ <- WriterT.lift[Unit, TurtleState, List[String]](State.modify[Position] {p => p.copy(x=p.x + d)})
-          } yield {}
+        override def transform[A](a: Movement[A]): TurtleStateWriter[A] = a match {
+          case Start(pos) => ???
+          case MoveUp(d) => ???
+          case MoveDown(d) => ???
+          case MoveLeft(d) => ???
+          case MoveRight(d) => ???
         }
       }
 

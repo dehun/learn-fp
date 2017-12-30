@@ -5,15 +5,12 @@ import learnfp.monoid.Monoid
 case class Writer[W, A](run: () => (W, A))(implicit val monoid:Monoid[W])
 
 object Writer {
-  def tell[W](m:W)(implicit monoid:Monoid[W]) = Writer[W, Unit]({ () => (m , ()) })
+  def tell[W](m:W)(implicit monoid:Monoid[W]):Writer[W, Unit] = ???
 }
 
 object WriterInstance {
   implicit def writerInstance[W] = new Functor[({type E[X] = Writer[W, X]})#E] {
-    override def fmap[A, B](a: Writer[W, A])(fx: A => B): Writer[W, B] = {
-      val (aw, av) = a.run()
-      Writer({() => (aw, fx(av))})(a.monoid)
-    }
+    override def fmap[A, B](a: Writer[W, A])(fx: A => B): Writer[W, B] = ???
   }
 
   implicit def writerToFunctorOps[A, W](a:Writer[W, A]) = new FunctorOps[A, ({type E[X] = Writer[W, X]})#E](a)

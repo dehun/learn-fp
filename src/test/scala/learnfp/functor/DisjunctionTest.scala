@@ -8,11 +8,11 @@ import FunctorOps._
 class DisjunctionTest extends WordSpecLike with Matchers {
   "either functor" should {
     "works with left" in {
-      LeftDisjunction[String, Int]("foo") fmap {x => x + "bar"} shouldBe LeftDisjunction[String, Int]("foo")
+      left[String, Int]("foo") fmap {x => x + "bar"} shouldBe LeftDisjunction[String, Int]("foo")
     }
 
     "works with right" in {
-      RightDisjunction[String, Int](10) fmap {x => x + 20} shouldBe RightDisjunction[String, Int](30)
+      right[String, Int](10) fmap {x => x + 20} shouldBe RightDisjunction[String, Int](30)
     }
 
     "works with disjunction" in {
@@ -21,19 +21,19 @@ class DisjunctionTest extends WordSpecLike with Matchers {
     }
 
     "left obeys identity" in {
-      val b = LeftDisjunction[String, Int]("error")
+      val b = left[String, Int]("error")
       b fmap identity shouldBe b
     }
 
     "right obeys identity" in {
-      val a = RightDisjunction[String, Int](10)
+      val a = right[String, Int](10)
       a fmap identity shouldBe a
     }
 
     "obeys composition" in {
       val f = { x:Int => x + 10 }
       val g = { x:Int => x * 2 }
-      val x = RightDisjunction[String, Int](10)
+      val x = right[String, Int](10)
 
       { x fmap f fmap g } shouldBe { x fmap {f andThen g} }
     }

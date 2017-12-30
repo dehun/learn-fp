@@ -12,14 +12,14 @@ object Printer {
 
 object ShowInstances {
   implicit val intInstance:Show[Int] = new Show[Int] {
-    override def show(x: Int): String = x.toString
+    override def show(x: Int): String = ???
   }
 
   implicit val doubleInstance:Show[Double] = new Show[Double] {
-    override def show(x: Double): String = x.toString
+    override def show(x: Double): String = ???
   }
 
   implicit def listInstance[T](implicit xShow:Show[T]):Show[List[T]] = new Show[List[T]] {
-    override def show(xs:List[T]): String = xs.map(xShow.show(_)).mkString("[", ", ", "]")
+    override def show(xs:List[T]): String = ???
   }
 }

@@ -7,12 +7,8 @@ import learnfp.monoid.MonoidOps._
 
 object WriterInstance {
   implicit def writerApplicativeInstance[A, R, W](implicit monoid:Monoid[W]) = new Applicative[A, R, ({type E[X] = Writer[W, X]})#E] {
-    override def pure[A](a: A): Writer[W, A] = Writer {() => (monoid.mzero, a)}
-    override def <*>(fx: Writer[W, A => R])(a: Writer[W, A]): Writer[W, R] = {
-      val (fxw, fxv ) = fx.run()
-      val (aw, av) = a.run()
-      Writer {() => (fxw |+| aw, fxv(av))}
-    }
+    override def pure[A](a: A): Writer[W, A] = ???
+    override def <*>(fx: Writer[W, A => R])(a: Writer[W, A]): Writer[W, R] = ???
   }
 
   implicit def writerToApplicativeOps[A, R, W](fx:Writer[W, A => R])(implicit monoid:Monoid[W]) =
