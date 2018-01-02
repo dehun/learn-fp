@@ -14,10 +14,6 @@ class MaybeTest extends WordSpecLike with Matchers {
     "works on Nothing" in {
       nothing[Int]() fmap {x:Int => x + 2} shouldBe Nothing[Int]()
     }
-    "works on Maybe" in {
-      val m:Maybe[Int] = Just(1)
-      m fmap {x:Int => x + 2} shouldBe Just[Int](3)
-    }
     "obey identity" in {
       just(1) fmap identity shouldBe Just(1)
       nothing[Int]() fmap identity shouldBe Nothing[Int]()
