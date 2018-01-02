@@ -102,8 +102,9 @@ Implementing something = making all tests green for that thing.
 
 # What wes left out #
 
+- Reader/ReaderT
 - Cofunctors
-- Reader
+- Comonads
 - Eff
   
 # Credits #
