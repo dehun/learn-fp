@@ -32,6 +32,7 @@ class TransformerStackTest extends WordSpecLike with Matchers {
         } yield x
       }.runStateT("null").runWriterT() match {
         case Just(v) => v shouldBe (List("een", "twee", "drie"), ("three", 10))
+        case Nothing() => throw new AssertionError("got nothing instead of just")
       }
     }
   }
