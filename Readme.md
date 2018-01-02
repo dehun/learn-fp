@@ -15,6 +15,8 @@ Some prior experience with functional idioms is recommended, but not neccessary.
 
 ## How to start ##
 Just git clone this repository and follow steps in progression section.
+You can use any ide and verify your results using `sbt test`. 
+For me intellij works best - you can easily run individual tests out of it.
 In case if you got stuck - check answers branch.
 
 ## Progression ##
