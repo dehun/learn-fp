@@ -1,6 +1,7 @@
 # Learn FP #
 ## Intro ##
 This course was created with purpose to better understand functional programming idioms using Scala language.
+It covers typeclasses, monoids, functors, applicatives, monads, free monad.   
 Material is structured as set of stub/unimplemented functions/classes and tests for them.
 Your objective is to make all unit tests green. It is learn-by-doing course.
 
