@@ -107,7 +107,7 @@ Implementing something = making all tests green for that thing.
 - Implement applicative for monad transformers
 - Implement applicative for Free
 
-# What wes left out #
+# What was left out #
 
 - Reader/ReaderT
 - Cofunctors
