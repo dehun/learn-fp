@@ -5,6 +5,9 @@ It covers type classes, monoids, functors, applicatives, monads, free monad.
 Material is structured as set of stub/unimplemented functions/classes and tests for them.
 Your objective is to make all unit tests green. It is learn-by-doing course.
 
+## Example session ##
+![Example session](example.gif?raw=true "Example session")
+
 ## Inspiration ##
 NICTA course was a great and interesting challenge for me to do in Haskell.
 I think Scala community will benefit from the similar course.
