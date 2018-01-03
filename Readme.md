@@ -1,7 +1,7 @@
 # Learn FP #
 ## Intro ##
 This course was created with purpose to better understand functional programming idioms using Scala language.
-It covers typeclasses, monoids, functors, applicatives, monads, free monad.   
+It covers type classes, monoids, functors, applicatives, monads, free monad.   
 Material is structured as set of stub/unimplemented functions/classes and tests for them.
 Your objective is to make all unit tests green. It is learn-by-doing course.
 
@@ -12,11 +12,11 @@ I think Scala community will benefit from the similar course.
 ## Target audience ##
 The material in here is quite poor on theoretical/explanation part.
 I have tried to link material from other authors that I have found to be good into this course Readme to compensate for this.
-Some prior experience with functional idioms is recommended, but not neccessary.
+Some prior experience with functional idioms is recommended, but not necessary.
 
 ## How to start ##
 Just git clone this repository and follow steps in progression section.
-You can use any ide and verify your results using `sbt test`. 
+You can use any IDE and verify your results using `sbt test`. 
 For me intellij works best - you can easily run individual tests out of it.
 In case if you got stuck - check answers branch.
 
@@ -24,9 +24,9 @@ In case if you got stuck - check answers branch.
 It is important to keep the progression - a lot of things depend on each other.
 Implementing something = making all tests green for that thing.
 
-### Typeclasses ###
+### Type classes ###
 
-- Observe general typeclass pattern in `learnfp/typeclass/TypeClass.scala`.
+- Observe general type class pattern in `learnfp/typeclass/TypeClass.scala`.
 - Implement `learnfp/typeclass/TotalOrder.scala`
 - Implement `learnfp/typeclass/Show.scala`
 - Extra material: 
