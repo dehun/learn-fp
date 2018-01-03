@@ -113,7 +113,7 @@ Implementing something = making all tests green for that thing.
 - Eff
 
 # Bugs/Issues #
-In case if find a bug/issue - please report it to https://github.com/dehun/learn-fp/issues or e-mail me on yuriy.netesov@gmail.com
+In case if find a bug/issue - please report it to https://github.com/dehun/learn-fp/issues or e-mail me on yuriy.netesov@gmail.com  
 You also are very welcome to create PR.
   
 # Credits #
