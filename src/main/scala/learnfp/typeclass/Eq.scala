@@ -18,15 +18,14 @@ object EqOps {
 
 object EqInstances {
   implicit val intEqInstance = new Eq[Int] {
-    override def eq(lhs: Int, rhs: Int): Boolean = lhs == rhs
+    override def eq(lhs: Int, rhs: Int): Boolean = ???
   }
 
   implicit val floatEqInstance = new Eq[String] {
-    override def eq(lhs: String, rhs: String): Boolean = lhs == rhs
+    override def eq(lhs: String, rhs: String): Boolean = ???
   }
 
   implicit def listEqInstance[A](implicit eqt:Eq[A]) = new Eq[List[A]] {
-    override def eq(lhs: List[A], rhs: List[A]): Boolean = (lhs.size == rhs.size) &&
-      lhs.zip(rhs).forall {case (l, r) => eqt.eq(l, r)}
+    override def eq(lhs: List[A], rhs: List[A]): Boolean = ???
   }
 }
