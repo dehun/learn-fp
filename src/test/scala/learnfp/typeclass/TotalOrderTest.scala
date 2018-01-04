@@ -10,8 +10,8 @@ class TotalOrderTest extends FlatSpec with Matchers {
   }
 
   "total order" should "compare strings" in {
-    Comparator.less(5, 10) shouldBe true
-    Comparator.less(10, 5) shouldBe false
+    Comparator.less("5", "9") shouldBe true
+    Comparator.less("9", "5") shouldBe false
   }
 
   "total order" should "compare list of ints" in {
