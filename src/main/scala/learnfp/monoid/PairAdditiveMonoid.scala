@@ -2,7 +2,7 @@ package learnfp.monoid
 
 case class Pair[A, B](a:A, b:B)
 
-object PairMonoid {
+object PairAdditiveMonoid {
 
   implicit def nestedMonoidInstance[A, B](implicit aMonoid:Monoid[A], bMonoid:Monoid[B]):Monoid[Pair[A, B]] =
     new Monoid[Pair[A, B]] {
