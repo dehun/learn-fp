@@ -4,8 +4,8 @@ import learnfp.functor.{Id, IdInstance => IdFunctorInstance}
 
 object IdInstance {
   import IdFunctorInstance._
-  implicit def idApplicativeInstance[A, R] = new Applicative[A, R, Id] {
+  implicit val idApplicativeInstance = new Applicative[Id] {
     override def pure[A](a: A): Id[A] = ???
-    override def <*>(fx: Id[A => R])(a: Id[A]): Id[R] = ???
+    override def <*>[A, R](fx: Id[A => R])(a: Id[A]): Id[R] = ???
   }
 }
