@@ -32,6 +32,7 @@ Implementing something = making all tests green for that thing.
 - Observe general type class pattern in `learnfp/typeclass/TypeClass.scala`.
 - Implement `learnfp/typeclass/TotalOrder.scala`
 - Implement `learnfp/typeclass/Show.scala`
+- Implement `learnfp/typeclass/Eq.scala`
 - Extra material: 
   - https://blog.scalac.io/2017/04/19/typeclasses-in-scala.html
 
