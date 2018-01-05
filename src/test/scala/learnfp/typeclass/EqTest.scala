@@ -34,8 +34,8 @@ class EqTest extends WordSpecLike with Matchers {
     }
 
     "our super ==== should not compare different types" in {
-      // "asd" ==== 5 shouldBe false // does not compile
-      // List(1, 2, 3) ==== List("a", "b", "c") // does not compile
+      """"asd" ==== 5 shouldBe false""" shouldNot compile
+      """List(1, 2, 3) ==== List("a", "b", "c")""" shouldNot compile
     }
   }
 }
