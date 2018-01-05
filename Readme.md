@@ -1,4 +1,4 @@
-# Learn FP || master: [![Build Status](https://travis-ci.org/dehun/learn-fp.svg?branch=master)](https://travis-ci.org/dehun/learn-fp) || answers: [![Build Status](https://travis-ci.org/dehun/learn-fp.svg?branch=answers)](https://travis-ci.org/dehun/learn-fp) #
+# Learn FP || [![Build Status](https://travis-ci.org/dehun/learn-fp.svg?branch=master)](https://travis-ci.org/dehun/learn-fp) [![Build Status](https://travis-ci.org/dehun/learn-fp.svg?branch=answers)](https://travis-ci.org/dehun/learn-fp) #
 ## Intro ##
 This course was created with purpose to better understand functional programming idioms using Scala language.
 It covers type classes, monoids, functors, applicatives, monads, free monad.   
