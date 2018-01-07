@@ -3,6 +3,7 @@ package learnfp.traversable
 import learnfp.traversable.TraversableInstances._
 import learnfp.traversable.TraversableOps._
 import learnfp.foldable.FoldableInstances._
+import learnfp.foldable.FoldableOps._
 import org.scalatest.{Matchers, WordSpecLike}
 
 class TraversableTest extends WordSpecLike with Matchers {
@@ -20,6 +21,14 @@ class TraversableTest extends WordSpecLike with Matchers {
       { List(Id(1), Id(2), Id(3), Id(4)) traverse {_ * 2} } shouldBe Id(List(2, 4, 6, 8))
     }
 
+    "traverse Id[Id]" in {
+      { Id(Id(1)) traverse {_ * 2} } shouldBe Id(Id(2))
+    }
+
+    "sequence Id[Id]" in {
+      { Id(Id(1)) sequence } shouldBe Id(Id(1))
+    }
+
     import learnfp.functor.Maybe._
     import learnfp.functor.MaybeInstance._
     import learnfp.applicative.MaybeInstance._
@@ -30,6 +39,14 @@ class TraversableTest extends WordSpecLike with Matchers {
 
     "traverse List[Maybe]" in {
       { List(just(5), just(10), just(3)) traverse {_ + 1} } shouldBe just(List(6, 11, 4))
+    }
+
+    "sequence Id[Maybe]" in {
+      { Id(just(5)) sequence } shouldBe just(Id(5))
+    }
+
+    "traverse Id[Maybe]" in {
+      { Id(just(5)) traverse {_ + 1} } shouldBe just(Id(6))
     }
 
     import learnfp.functor.ListInstance._
@@ -45,6 +62,14 @@ class TraversableTest extends WordSpecLike with Matchers {
       { List(List(1), List(2, 3), List(4, 5, 6)) traverse { _ + 1 } } shouldBe List(
         List(2, 3, 5), List(2, 3, 6), List(2, 3, 7),
         List(2, 4, 5), List(2, 4, 6), List(2, 4, 7))
+    }
+
+    "traverse Id[List]" in {
+      Id(List(1, 2, 3)) traverse {_ + 1} shouldBe List(Id(2), Id(3), Id(4))
+    }
+
+    "sequence Id[List]" in {
+      { Id(List(1, 2, 3)) sequence } shouldBe List(Id(1), Id(2), Id(3))
     }
 
     import learnfp.functor.Disjunction._
@@ -82,6 +107,14 @@ class TraversableTest extends WordSpecLike with Matchers {
       { List(5.pure[String], stringState {s:String => (s + "boom", 6)}, 7.pure[String]) traverse {x:Int => x * 2} }.run("baam ") shouldBe ("baam boom", List(10, 12, 14))
     }
 
+    "sequence Id[State]" in {
+      { Id(stringState {s:String => (s + " boom", 6)}) sequence }.run("baam") shouldBe ("baam boom", Id(6))
+    }
+
+    "traverse Id[State]" in {
+      { Id(stringState {s:String => (s + " boom", 6)}) traverse { _ + 2} }.run("baam") shouldBe ("baam boom", Id(8))
+    }
+
     import learnfp.functor.Writer
     import learnfp.functor.Writer._
     import learnfp.functor.WriterInstance._
@@ -101,6 +134,14 @@ class TraversableTest extends WordSpecLike with Matchers {
     "traverse List[Writer]" in {
       {List(stringWriter {() => (List("een"), 1)}, stringWriter {() => (List("twee"), 2)}, stringWriter {() => (List("drie"), 3)}) traverse {x:Int => x + 1}}.run() shouldBe (
         List("een", "twee", "drie"), List(2, 3, 4))
+    }
+
+    "sequence Id[Writer]" in {
+      { Id(stringWriter({() => (List("een"), 1)})) sequence }.run() shouldBe (List("een"), Id(1))
+    }
+
+    "traverse Id[Writer]" in {
+      { Id(stringWriter({() => (List("een"), 1)})) traverse {_ * 2} }.run() shouldBe (List("een"), Id(2))
     }
   }
 }
