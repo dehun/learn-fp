@@ -1,6 +1,7 @@
 package learnfp.foldable
 
 import learnfp.functor.Disjunction.{Disjunction, LeftDisjunction, RightDisjunction}
+import learnfp.functor.Id
 import learnfp.functor.Maybe.{Just, Maybe, Nothing}
 
 trait Foldable[C[_]] {
@@ -8,6 +9,10 @@ trait Foldable[C[_]] {
 }
 
 object FoldableInstances {
+  implicit def idFoldable = new Foldable[Id] {
+    override def foldr[A, B](xs: Id[A])(init: B)(fx: (A, B) => B): B = fx(xs.value, init)
+  }
+
   implicit def listFoldable = new Foldable[List] {
     override def foldr[A, B](xs: List[A])(init: B)(fx: (A, B) => B): B = xs.foldRight(init)(fx)
   }

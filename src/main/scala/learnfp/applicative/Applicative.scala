@@ -2,7 +2,7 @@ package learnfp.applicative
 
 import learnfp.functor.Functor
 
-abstract class Applicative[F[_]](implicit f:Functor[F]) {
+abstract class Applicative[F[_]](implicit functor:Functor[F]) {
   def <*>[A, R](fx:F[A => R])(a:F[A]):F[R]
   def pure[A](a:A):F[A]
 }
