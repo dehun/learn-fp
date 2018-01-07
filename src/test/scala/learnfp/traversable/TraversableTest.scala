@@ -11,7 +11,7 @@ class TraversableTest extends WordSpecLike with Matchers {
   import learnfp.functor.IdInstance._
   import learnfp.applicative.IdInstance._
 
-  "traversable" should {
+  "traversable List" should {
     "sequence Id" in {
       { toTraversableOps(List(Id(1), Id(2), Id(3), Id(4))) sequence } shouldBe Id(List(1, 2, 3, 4))
     }
@@ -47,39 +47,41 @@ class TraversableTest extends WordSpecLike with Matchers {
         List(2, 4, 5), List(2, 4, 6), List(2, 4, 7))
     }
 
-//    import learnfp.functor.Disjunction._
-//    import learnfp.functor.DisjunctionInstance._
-//    import learnfp.applicative.DisjunctionInstance._
-//
-//    def r(x:Int) = right[String, Int](x)
-//    def l(x:String) = left[String, Int](x)
-//
-//    "sequence Disjunction" in {
-//      { List(r(5), r(6), r(7)) sequence } shouldBe right[String, List[Int]](List(5, 6, 7));
-//      { List(r(5), l("boom"), r(7)) sequence } shouldBe left[String, List[Int]]("boom");
-//      { List(r(5), l("boom"), l("baam")) sequence } shouldBe left[String, List[Int]]("boom")
-//    }
-//
-//    "traverse Disjunction" in {
-//      { List(r(5), r(6), r(7)) traverse {_ + 1} } shouldBe right[String, List[Int]](List(6, 7, 8));
-//      { List(r(5), l("boom"), r(7)) traverse {_ + 1} } shouldBe left[String, List[Int]]("boom");
-//      { List(r(5), l("boom"), l("baam")) traverse {_ + 1} } shouldBe left[String, List[Int]]("boom")
-//    }
-//
-//    import learnfp.functor.State
-//    import learnfp.functor.State._
-//    import learnfp.functor.StateInstance._
-//    import learnfp.applicative.StateInstance._
-//    import learnfp.traversable.StateInstance._
-//
-//    "sequence State" in {
-//       { List(5.pure[String], State {s:String => (s + "boom", 6)}, 7.pure[String]) sequence }.run("baam ") shouldBe ("baam boom", List(5, 6, 7))
-//    }
-//
-//    "traverse State" in {
-//      { List(5.pure[String], State {s:String => (s + "boom", 6)}, 7.pure[String]) traverse {x:Int => x * 2} }.run("baam ") shouldBe ("baam boom", List(10, 12, 14))
-//    }
-//
+    import learnfp.functor.Disjunction._
+    import learnfp.functor.DisjunctionInstance._
+    import learnfp.applicative.DisjunctionInstance._
+
+    type StringDisjunction[A] = Disjunction[String, A]
+    def r(x:Int):StringDisjunction[Int] = right[String, Int](x)
+    def l(x:String):StringDisjunction[Int] = left[String, Int](x)
+
+    "sequence Disjunction" in {
+      { List(r(5), r(6), r(7)) sequence } shouldBe right[String, List[Int]](List(5, 6, 7));
+      { List(r(5), l("boom"), r(7)) sequence } shouldBe left[String, List[Int]]("boom");
+      { List(r(5), l("boom"), l("baam")) sequence } shouldBe left[String, List[Int]]("boom")
+    }
+
+    "traverse Disjunction" in {
+      { List(r(5), r(6), r(7)) traverse {_ + 1} } shouldBe right[String, List[Int]](List(6, 7, 8));
+      { List(r(5), l("boom"), r(7)) traverse {_ + 1} } shouldBe left[String, List[Int]]("boom");
+      { List(r(5), l("boom"), l("baam")) traverse {_ + 1} } shouldBe left[String, List[Int]]("boom")
+    }
+
+    import learnfp.functor.State
+    import learnfp.functor.State._
+    import learnfp.functor.StateInstance._
+    import learnfp.applicative.StateInstance._
+    type StringState[A] = State[String, A]
+    def stringState[A](fx:String => (String, A)):StringState[A] = State[String, A](fx)
+
+    "sequence State" in {
+       { List(5.pure[String], stringState {s:String => (s + "boom", 6)}, 7.pure[String]) sequence }.run("baam ") shouldBe ("baam boom", List(5, 6, 7))
+    }
+
+    "traverse State" in {
+      { List(5.pure[String], stringState {s:String => (s + "boom", 6)}, 7.pure[String]) traverse {x:Int => x * 2} }.run("baam ") shouldBe ("baam boom", List(10, 12, 14))
+    }
+
 //    import learnfp.functor.Writer
 //    import learnfp.functor.Writer._
 //    import learnfp.functor.WriterInstance._
