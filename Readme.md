@@ -1,7 +1,7 @@
-# Learn FP || [![Build Status](https://travis-ci.org/dehun/learn-fp.svg?branch=master)](https://travis-ci.org/dehun/learn-fp) [![Build Status](https://travis-ci.org/dehun/learn-fp.svg?branch=answers)](https://travis-ci.org/dehun/learn-fp) #
+# Learn Functional Programming course/tutorial on Scala  [![Build Status](https://travis-ci.org/dehun/learn-fp.svg?branch=master)](https://travis-ci.org/dehun/learn-fp) [![Build Status](https://travis-ci.org/dehun/learn-fp.svg?branch=answers)](https://travis-ci.org/dehun/learn-fp) #
 ## Intro ##
-This course was created with purpose to better understand functional programming idioms using Scala language.
-It covers type classes, monoids, functors, applicatives, monads, free monad.   
+This course/tutorial was created with purpose to better understand functional programming idioms using Scala language.
+It covers type classes, monoids, functors, applicatives, monads, traversable/foldable, monad transformers, free monad.   
 Material is structured as set of stub/unimplemented functions/classes and tests for them.
 Your objective is to make all unit tests green. It is learn-by-doing course.
 
