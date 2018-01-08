@@ -22,6 +22,24 @@ object TraversableInstances {
     }
   }
 
+  type STuple2[A] = (A, A)
+  def stuple2[A](a:A, b:A):STuple2[A] = (a, b)
+
+  implicit val tuple2TraversableInstance = new Traversable[STuple2] {
+    override def traverse[A, B, F[_]](xs: (F[A], F[A]))(fx: A => B)(implicit foldable: Foldable[STuple2], functor: Functor[F], applicative: Applicative[F]): F[(B, B)] = {
+      { (a:A, b:A) => (fx(a), fx(b)) }.curried `<$>` xs._1 <*> xs._2
+    }
+  }
+
+  type STuple3[A] = (A, A, A)
+  def stuple3[A](a:A, b:A, c:A):STuple3[A] = (a, b, c)
+
+  implicit val tuple3TraversableInstance = new Traversable[STuple3] {
+    override def traverse[A, B, F[_]](xs: (F[A], F[A], F[A]))(fx: A => B)(implicit foldable: Foldable[STuple3], functor: Functor[F], applicative: Applicative[F]): F[(B, B, B)] = {
+      { (a:A, b:A, c:A) => (fx(a), fx(b), fx(c)) }.curried `<$>` xs._1 <*> xs._2 <*> xs._3
+    }
+  }
+
   implicit val listTraversableInstance = new Traversable[List] {
     override def traverse[A, B, F[_]](xs: List[F[A]])(fx: A => B)(implicit foldable: Foldable[List],
                                                                   functor: Functor[F], applicative: Applicative[F]): F[List[B]] = {
