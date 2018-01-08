@@ -72,6 +72,10 @@ Implementing something = making all tests green for that thing.
 - Extra material
   - Brian Beckman: Don't fear the Monad
   - http://eed3si9n.com/learning-scalaz/Monad+transformers.html
+  
+### Foldable ###
+
+- Implement foldable in `learnfp/foldable/Foldable.scala`
 
 ### Applicatives ###
 
@@ -82,10 +86,13 @@ Implementing something = making all tests green for that thing.
 - Implement `learnfp/applicative/Disjunction.scala`
 - Implement `learnfp/applicative/Writer.scala`
 - Implement `learnfp/applicative/State.scala`
-- Implement `learnfp/traversable/Traversable.scala`
 - Extra material 
   - https://en.wikibooks.org/wiki/Haskell/Applicative_functors
   - http://eed3si9n.com/learning-scalaz/Applicative.html
+  
+### Traversable ###
+
+- Implement `learnfp/traversable/Traversable.scala`
 
 ### Monad Transformers ###
 
