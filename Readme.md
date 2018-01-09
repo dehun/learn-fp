@@ -41,7 +41,7 @@ Implementing something = making all tests green for that thing.
 - Observe general monoid pattern in `learnfp/monoid/Monoid.scala`
 - Implement `learn-fp/src/main/scala/learnfp/monoid/ListMonoid.scala`
 - Implement `learn-fp/src/main/scala/learnfp/monoid/SimpleMonoid.scala`
-- Implement `learnfp/monoid/PairMonoid.scala`
+- Implement `learnfp/monoid/PairAdditiveMonoid.scala`
 - Extra material:
   - Bartosz Milewski: Category Theory 3.1: Examples of categories, orders, monoids
   
