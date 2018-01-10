@@ -21,7 +21,7 @@ object EqInstances {
     override def eq(lhs: Int, rhs: Int): Boolean = ???
   }
 
-  implicit val floatEqInstance = new Eq[String] {
+  implicit val stringEqInstance = new Eq[String] {
     override def eq(lhs: String, rhs: String): Boolean = ???
   }
 
