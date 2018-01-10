@@ -18,11 +18,11 @@ object EqOps {
 
 object EqInstances {
   implicit val intEqInstance = new Eq[Int] {
-    override def eq(lhs: Int, rhs: Int): Boolean = lhs == rhs
+    override def eq(lhs: Int, rhs: Int): Boolean = ???
   }
 
   implicit val floatEqInstance = new Eq[String] {
-    override def eq(lhs: String, rhs: String): Boolean = lhs == rhs
+    override def eq(lhs: String, rhs: String): Boolean = ???
   }
 
   implicit def listEqInstance[A](implicit eqt:Eq[A]) = new Eq[List[A]] {
