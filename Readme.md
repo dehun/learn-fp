@@ -111,6 +111,18 @@ Implementing something = making all tests green for that thing.
   - http://blog.krobinson.me/posts/monads-part-2-the-free-monad/
   - https://underscore.io/blog/posts/2015/04/14/free-monads-are-simple.html
   
+### CoFunctors(aka Contravariant functor) ###
+
+- Observe general cofunctor pattern in `learnfp/cofunctor/CoFunctor.scala`
+- Implement `learnfp/cofunctor/Show.scala`
+- Implement `learnfp/cofunctor/Predicate.scala`
+
+### CoMonads ###
+
+- Observe general cofunctor pattern in `learnfp/comonad/CoMonad.scala`
+- Implement `learnfp/comonad/Id.scala`
+- Implement `learnfp/comonad/Env.scala`
+  
 ### Bonus ###
 
 - Implement Reader functor, monad, applicative and write unit tests for that
@@ -121,8 +133,6 @@ Implementing something = making all tests green for that thing.
 # What was left out #
 
 - Reader/ReaderT
-- Cofunctors
-- Comonads
 - Eff
 
 # Bugs/Issues #
