@@ -14,7 +14,7 @@ class StateTest extends WordSpecLike with Matchers {
     }
 
     "fmap works" in {
-      { State[String, Int]({s => (s, 10)}) fmap {x:Int => x + 20} }.run("state") shouldBe ("state", 30)
+      { State[String, Int]({s => ("extended " + s, 10)}) fmap {x:Int => x + 20} }.run("state") shouldBe ("extended state", 30)
     }
 
     "obey identity" in {
