@@ -4,9 +4,15 @@ import org.scalatest.{Matchers, WordSpecLike}
 
 import FoldableInstances._
 import FoldableOps._
+import learnfp.functor.Id
 
 class FoldableTest extends WordSpecLike with Matchers {
   "Foldable" should {
+
+    "work with id" in {
+      Id("a").myfoldr("b")((x, a) => a + x) shouldBe "ba"
+    }
+
     "work with list" in {
       List("a", "b", "c").myfoldr("init"){(x, a) => a + x} shouldBe ("initcba")
     }
