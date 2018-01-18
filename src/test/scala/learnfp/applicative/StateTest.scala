@@ -9,8 +9,14 @@ import learnfp.applicative.StateInstance._
 class StateTest extends WordSpecLike with Matchers {
   "state applicative" should {
     "work" in {
-      def pure(x:Int) =
-      { { (x:Int, y:Int, z:Int) => (x, y, z) }.curried `<$>` 10.pure[String] <*> 20.pure[String] <*> 30.pure[String] }.run("asd") shouldBe ("asd", (10, 20, 30))
+      {
+        { (x: Int, y: Int, z: Int) => (x, y, z) }.curried `<$>` countAndRemove('a') <*> 20.pure[String] <*> countAndRemove('b')
+      }.run("abracadabra") shouldBe("rcdr", (5, 20, 2))
     }
+  }
+
+  private def countAndRemove(char: Char): State[String, Int] = State { (s: String) =>
+    val (chars, other) = s.partition(_ == char)
+    (other, chars.size)
   }
 }
