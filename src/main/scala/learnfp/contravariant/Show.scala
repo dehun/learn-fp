@@ -1,9 +1,9 @@
-package learnfp.cofunctor
+package learnfp.contravariant
 
 case class Show[A](show:A => String)
 
 object Show {
-  implicit val showCoFunctorInstance = new CoFunctor[Show] {
+  implicit val showContravariantFunctorInstance = new ContravariantFunctor[Show] {
     override def cmap[A, B](b: Show[B])(fx: A => B): Show[A] = ???
   }
 }

@@ -1,7 +1,7 @@
-package learnfp.cofunctor
+package learnfp.contravariant
 
-import learnfp.cofunctor.Predicate._
-import learnfp.cofunctor.CoFunctorOps._
+import learnfp.contravariant.Predicate._
+import learnfp.contravariant.ContravariantFunctorOps._
 import org.scalatest.{Matchers, WordSpecLike}
 
 class PredicateTest extends WordSpecLike with Matchers {
