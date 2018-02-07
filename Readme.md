@@ -113,7 +113,7 @@ Implementing something = making all tests green for that thing.
   
 ### Contravariant functor ###
 
-- Observe general cofunctor pattern in `learnfp/contravariant/ContravariantFunctor.scala`
+- Observe general contravariant functor pattern in `learnfp/contravariant/ContravariantFunctor.scala`
 - Implement `learnfp/contravariant/Show.scala`
 - Implement `learnfp/contravariant/Predicate.scala`
 
