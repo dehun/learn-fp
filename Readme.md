@@ -94,6 +94,10 @@ Implementing something = making all tests green for that thing.
 
 - Implement `learnfp/traversable/Traversable.scala`
 
+### Nested ###
+
+- Implement `learnfp/nested/Nested.scala`
+
 ### Monad Transformers ###
 
 - Observe general monad transformer typeclass in `learnfp/transformer/MonadTransformer.scala`
