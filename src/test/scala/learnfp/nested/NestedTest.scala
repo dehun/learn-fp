@@ -47,6 +47,7 @@ class NestedTest extends WordSpecLike with Matchers {
     // when we got applicatives we can traverse
     import learnfp.traversable.TraversableInstances._
     import learnfp.traversable.TraversableOps._
+    import learnfp.traversable.SequenceOps._
     import learnfp.foldable.FoldableInstances._
 
     "traverse with Id[Id[_]]" in {
@@ -63,6 +64,15 @@ class NestedTest extends WordSpecLike with Matchers {
         case 1 => x
         case 2 => y
       } }.value shouldBe List(
+        just(List(1, 4)), just(List(1, 5)),
+        nothing[List[Int]], nothing[List[Int]],
+        just(List(3, 4)), just(List(3, 5)))
+    }
+
+    "sequence with List[Maybe[_]]" in {
+      val x:NestedListMaybe[Int] = Nested(List(just(1), nothing[Int], just(3)))
+      val y:NestedListMaybe[Int] = Nested(List(just(4), just(5)));
+      List(x, y).sequence.value shouldBe List(
         just(List(1, 4)), just(List(1, 5)),
         nothing[List[Int]], nothing[List[Int]],
         just(List(3, 4)), just(List(3, 5)))

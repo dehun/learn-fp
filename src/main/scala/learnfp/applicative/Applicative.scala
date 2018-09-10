@@ -3,8 +3,8 @@ package learnfp.applicative
 import learnfp.functor.Functor
 
 abstract class Applicative[F[_]](implicit functor:Functor[F]) {
-  def <*>[A, R](fx:F[A => R])(a:F[A]):F[R]
   def pure[A](a:A):F[A]
+  def <*>[A, R](fx:F[A => R])(a:F[A]):F[R]
 }
 
 class FxApplicativeOps[A, R, F[_]](fx:F[A => R]) {
