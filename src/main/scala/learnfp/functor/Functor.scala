@@ -16,7 +16,7 @@ class FxFunctorOps[A, B](fx:A => B) {
 }
 
 object FunctorOps {
-  implicit def toFunctorOps[A, F[_]](f:F[A])(implicit functor:Functor[F]):FunctorOps[A, F] = new FunctorOps(f)
+  implicit def toFunctorOps[A, F[_]:Functor](f:F[A]):FunctorOps[A, F] = new FunctorOps(f)
   implicit def fxToFunctorOps[A, B](fx:A => B):FxFunctorOps[A, B] = new FxFunctorOps[A, B](fx)
 }
 
