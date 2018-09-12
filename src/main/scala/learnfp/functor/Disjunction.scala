@@ -20,10 +20,8 @@ object DisjunctionInstance {
     new FunctorOps[R, ({type E[A] = D[L, A]})#E](disjunction)
   }
 
-  class DisjunctionFxOps[A, R](fx:A => R) {
+  implicit class DisjunctionFxOps[A, R](fx:A => R) {
     def `<$>`[L](a:Disjunction[L, A]):Disjunction[L, R] = a fmap fx
   }
-
-  implicit def toFxOps[A, R](fx:A => R):DisjunctionFxOps[A, R] = new DisjunctionFxOps(fx)
 }
 
