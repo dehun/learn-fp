@@ -100,7 +100,7 @@ Implementing something = making all tests green for that thing.
 
 ### IO ###
 
-- Implement `learnfp/nested/IO.scala` 
+- Implement `learnfp/io/IO.scala` 
 
 ### Monad Transformers ###
 
